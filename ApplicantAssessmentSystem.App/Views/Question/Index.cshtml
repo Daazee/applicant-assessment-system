@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ApplicantAssessmentSystem.App.Models.ViewModels.QuestionViewModel>
+
+@{
+    ViewData["Title"] = "Questions";
+    Layout = "~/Views/Shared/AssessmentManager_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.QuestionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuestionText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Option1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Option2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Option3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Answer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AttributedScore)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Option1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Option2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Option3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttributedScore)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.QuestionId }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

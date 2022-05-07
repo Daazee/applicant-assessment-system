@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ApplicantAssessmentSystem.App.Models.ViewModels.ApplicantViewModel>
+
+@{
+    ViewData["Title"] = "Enrol";
+    Layout = "~/Views/Shared/AssessmentManager_Layout.cshtml";
+}
+<!-- Start Page Title -->
+<div class="pagetitle">
+    <h1>Applicants</h1>
+</div><!-- End Page Title -->
+
+
+<p>
+    <a asp-action="Enrol">Add new Applicant</a>
+</p>
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Highest Qualification</th>
+            <th scope="col">Institution Name</th>
+            <th scope="col">Graduation Year</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HighestQualification)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstitutionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraduationYear)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+        }
+        </tbody>
+</table>
