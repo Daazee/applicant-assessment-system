@@ -10,8 +10,9 @@
 <section class="section">
     <div class="row">
         <div class="col-lg-6">
-            <button type="submit" class="btn btn-primary" id="startGeneralKnowledge">Start General Knowlege</button>
-
+            <button type="submit" class="btn btn-primary" id="startGeneralKnowledgeButton">Start General Knowlege Test</button>
+            <button type="submit" class="btn btn-primary" id="startMathematicsButton" disabled="disabled">Start Mathematics Test</button>
+            <button type="submit" class="btn btn-primary" id="startComputerTechnologyButton" disabled="disabled">Start Computer Technology Test</button>
             <div class="card" id="general-knowledge-card" style="display:none">
                 <div class="card-body">
 
@@ -123,7 +124,7 @@
                         </div>
                         <div id="GeneralKnowledge5">
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" id="GeneralKnowledgeQuestio5Number"></label>
+                                <label class="col-sm-2 col-form-label" id="GeneralKnowledgeQuestion5Number"></label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control" id="GeneralKnowledgeQuestion5Text" readonly>
                                 </div>
@@ -153,7 +154,8 @@
 
                 </div>
             </div>
-
+            @await Html.PartialAsync("_Mathematics")
+            @await Html.PartialAsync("_ComputerTechnology")
         </div>
     </div>
 </section>
@@ -162,13 +164,306 @@
     <script>
         $(document).ready(function () {
 
-            $('#startGeneralKnowledge').click(function (e) {
+            $('#startGeneralKnowledgeButton').click(function (e) {
                 debugger;
                 e.preventDefault();
                 document.getElementById("general-knowledge-card").style.display = "block"
-                document.getElementById("startGeneralKnowledge").style.display = "none";
+                document.getElementById("startGeneralKnowledgeButton").style.display = "none";
                 getGeneralKnowledgeQuestions();
             })
+
+            $('#startMathematicsButton').click(function (e) {
+                debugger;
+                e.preventDefault();
+                document.getElementById("mathematics-card").style.display = "block"
+                document.getElementById("startMathematicsButton").style.display = "none";
+                getMathematicsQuestions();
+            })
+
+            $('#startComputerTechnologyButton').click(function (e) {
+                debugger;
+                e.preventDefault();
+                document.getElementById("computer-technology-card").style.display = "block"
+                document.getElementById("startComputerTechnologyButton").style.display = "none";
+                getComputerTechnologyQuestions();
+            })
+
+            $('#SubmitGeneralKnowledge').click(function (e) {
+                debugger;
+                e.preventDefault();
+                document.getElementById("startMathematicsButton").disabled = false
+                document.getElementById("general-knowledge-card").style.display = "none"
+            })
+
+            $('#SubmitMathematics').click(function (e) {
+                debugger;
+                e.preventDefault();
+                document.getElementById("startComputerTechnologyButton").disabled = false
+                document.getElementById("mathematics-card").style.display = "none"
+            })
+
+            $('#SubmitComputerTechnology').click(function (e) {
+                debugger;
+                e.preventDefault();
+                // document.getElementById("startMathematics").disabled = false
+                document.getElementById("computer-technology-card").style.display = "none"
+            })
+
+
+            function getGeneralKnowledgeQuestions() {
+                let subject = "General Knowledge";
+                $.ajax({
+                    url: '../api/question/GetQuestionBySubject',
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    async: false,
+                    data: {
+                        subject: subject
+                    },
+                    success: function (response) {
+                        debugger;
+                        if (response !== null) {
+                            for (let i = 0; i < response.length; i++) {
+                                if (response[i].questionNumber === 1) {
+                                    $('#GeneralKnowledgeQuestion1Number').text(response[i].questionNumber);
+                                    $('#GeneralKnowledgeQuestion1Text').val(response[i].questionText);
+                                    $('#GeneralKnowledgeQuestion1option1').val(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion1option2').val(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion1option3').val(response[i].option3);
+
+                                    $('#GeneralKnowledgeQuestion1option1Label').text(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion1option2Label').text(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion1option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 2) {
+                                    $('#GeneralKnowledgeQuestion2Number').text(response[i].questionNumber);
+                                    $('#GeneralKnowledgeQuestion2Text').val(response[i].questionText);
+                                    $('#GeneralKnowledgeQuestion2option1').val(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion2option2').val(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion2option3').val(response[i].option3);
+
+                                    $('#GeneralKnowledgeQuestion2option1Label').text(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion2option2Label').text(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion2option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 3) {
+                                    $('#GeneralKnowledgeQuestion3Number').text(response[i].questionNumber);
+                                    $('#GeneralKnowledgeQuestion3Text').val(response[i].questionText);
+                                    $('#GeneralKnowledgeQuestion3option1').val(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion3option2').val(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion3option3').val(response[i].option3);
+
+                                    $('#GeneralKnowledgeQuestion3option1Label').text(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion3option2Label').text(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion3option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 4) {
+                                    $('#GeneralKnowledgeQuestion4Number').text(response[i].questionNumber);
+                                    $('#GeneralKnowledgeQuestion4Text').val(response[i].questionText);
+                                    $('#GeneralKnowledgeQuestion4option1').val(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion4option2').val(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion4option3').val(response[i].option3);
+
+                                    $('#GeneralKnowledgeQuestion4option1Label').text(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion4option2Label').text(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion4option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 5) {
+                                    $('#GeneralKnowledgeQuestion5Number').text(response[i].questionNumber);
+                                    $('#GeneralKnowledgeQuestion5Text').val(response[i].questionText);
+                                    $('#GeneralKnowledgeQuestion5option1').val(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion5option2').val(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion5option3').val(response[i].option3);
+                                    4
+                                    $('#GeneralKnowledgeQuestion5option1Label').text(response[i].option1);
+                                    $('#GeneralKnowledgeQuestion5option2Label').text(response[i].option2);
+                                    $('#GeneralKnowledgeQuestion5option3Label').text(response[i].option3);
+                                }
+
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        //alert("Error occured");//To avoid alerting if no internet connection.
+                        console.log(error);
+                    }
+                });
+            }
+
+            function getMathematicsQuestions() {
+                let subject = "Mathematics";
+                $.ajax({
+                    url: '../api/question/GetQuestionBySubject',
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    async: false,
+                    data: {
+                        subject: subject
+                    },
+                    success: function (response) {
+                        debugger;
+                        if (response !== null) {
+                            for (let i = 0; i < response.length; i++) {
+                                if (response[i].questionNumber === 1) {
+                                    $('#MathematicsQuestion1Number').text(response[i].questionNumber);
+                                    $('#MathematicsQuestion1Text').val(response[i].questionText);
+                                    $('#MathematicsQuestion1option1').val(response[i].option1);
+                                    $('#MathematicsQuestion1option2').val(response[i].option2);
+                                    $('#MathematicsQuestion1option3').val(response[i].option3);
+
+                                    $('#MathematicsQuestion1option1Label').text(response[i].option1);
+                                    $('#MathematicsQuestion1option2Label').text(response[i].option2);
+                                    $('#MathematicsQuestion1option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 2) {
+                                    $('#MathematicsQuestion2Number').text(response[i].questionNumber);
+                                    $('#MathematicsQuestion2Text').val(response[i].questionText);
+                                    $('#MathematicsQuestion2option1').val(response[i].option1);
+                                    $('#MathematicsQuestion2option2').val(response[i].option2);
+                                    $('#MathematicsQuestion2option3').val(response[i].option3);
+
+                                    $('#MathematicsQuestion2option1Label').text(response[i].option1);
+                                    $('#MathematicsQuestion2option2Label').text(response[i].option2);
+                                    $('#MathematicsQuestion2option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 3) {
+                                    $('#MathematicsQuestion3Number').text(response[i].questionNumber);
+                                    $('#MathematicsQuestion3Text').val(response[i].questionText);
+                                    $('#MathematicsQuestion3option1').val(response[i].option1);
+                                    $('#MathematicsQuestion3option2').val(response[i].option2);
+                                    $('#MathematicsQuestion3option3').val(response[i].option3);
+
+                                    $('#MathematicsQuestion3option1Label').text(response[i].option1);
+                                    $('#MathematicsQuestion3option2Label').text(response[i].option2);
+                                    $('#MathematicsQuestion3option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 4) {
+                                    $('#MathematicsQuestion4Number').text(response[i].questionNumber);
+                                    $('#MathematicsQuestion4Text').val(response[i].questionText);
+                                    $('#MathematicsQuestion4option1').val(response[i].option1);
+                                    $('#MathematicsQuestion4option2').val(response[i].option2);
+                                    $('#MathematicsQuestion4option3').val(response[i].option3);
+
+                                    $('#MathematicsQuestion4option1Label').text(response[i].option1);
+                                    $('#MathematicsQuestion4option2Label').text(response[i].option2);
+                                    $('#MathematicsQuestion4option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 5) {
+                                    $('#MathematicsQuestion5Number').text(response[i].questionNumber);
+                                    $('#MathematicsQuestion5Text').val(response[i].questionText);
+                                    $('#MathematicsQuestion5option1').val(response[i].option1);
+                                    $('#MathematicsQuestion5option2').val(response[i].option2);
+                                    $('#MathematicsQuestion5option3').val(response[i].option3);
+                                    4
+                                    $('#MathematicsQuestion5option1Label').text(response[i].option1);
+                                    $('#MathematicsQuestion5option2Label').text(response[i].option2);
+                                    $('#MathematicsQuestion5option3Label').text(response[i].option3);
+                                }
+
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        //alert("Error occured");//To avoid alerting if no internet connection.
+                        console.log(error);
+                    }
+                });
+            }
+
+            function getComputerTechnologyQuestions() {
+                let subject = "Computer Technology";
+                $.ajax({
+                    url: '../api/question/GetQuestionBySubject',
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    async: false,
+                    data: {
+                        subject: subject
+                    },
+                    success: function (response) {
+                        debugger;
+                        if (response !== null) {
+                            for (let i = 0; i < response.length; i++) {
+                                if (response[i].questionNumber === 1) {
+                                    $('#ComputerTechnologyQuestion1Number').text(response[i].questionNumber);
+                                    $('#ComputerTechnologyQuestion1Text').val(response[i].questionText);
+                                    $('#ComputerTechnologyQuestion1option1').val(response[i].option1);
+                                    $('#ComputerTechnologyQuestion1option2').val(response[i].option2);
+                                    $('#ComputerTechnologyQuestion1option3').val(response[i].option3);
+
+                                    $('#ComputerTechnologyQuestion1option1Label').text(response[i].option1);
+                                    $('#ComputerTechnologyQuestion1option2Label').text(response[i].option2);
+                                    $('#ComputerTechnologyQuestion1option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 2) {
+                                    $('#ComputerTechnologyQuestion2Number').text(response[i].questionNumber);
+                                    $('#ComputerTechnologyQuestion2Text').val(response[i].questionText);
+                                    $('#ComputerTechnologyQuestion2option1').val(response[i].option1);
+                                    $('#ComputerTechnologyQuestion2option2').val(response[i].option2);
+                                    $('#ComputerTechnologyQuestion2option3').val(response[i].option3);
+
+                                    $('#ComputerTechnologyQuestion2option1Label').text(response[i].option1);
+                                    $('#ComputerTechnologyQuestion2option2Label').text(response[i].option2);
+                                    $('#ComputerTechnologyQuestion2option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 3) {
+                                    $('#ComputerTechnologyQuestion3Number').text(response[i].questionNumber);
+                                    $('#ComputerTechnologyQuestion3Text').val(response[i].questionText);
+                                    $('#ComputerTechnologyQuestion3option1').val(response[i].option1);
+                                    $('#ComputerTechnologyQuestion3option2').val(response[i].option2);
+                                    $('#ComputerTechnologyQuestion3option3').val(response[i].option3);
+
+                                    $('#ComputerTechnologyQuestion3option1Label').text(response[i].option1);
+                                    $('#ComputerTechnologyQuestion3option2Label').text(response[i].option2);
+                                    $('#ComputerTechnologyQuestion3option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 4) {
+                                    $('#ComputerTechnologyQuestion4Number').text(response[i].questionNumber);
+                                    $('#ComputerTechnologyQuestion4Text').val(response[i].questionText);
+                                    $('#ComputerTechnologyQuestion4option1').val(response[i].option1);
+                                    $('#ComputerTechnologyQuestion4option2').val(response[i].option2);
+                                    $('#ComputerTechnologyQuestion4option3').val(response[i].option3);
+
+                                    $('#ComputerTechnologyQuestion4option1Label').text(response[i].option1);
+                                    $('#ComputerTechnologyQuestion4option2Label').text(response[i].option2);
+                                    $('#ComputerTechnologyQuestion4option3Label').text(response[i].option3);
+                                }
+
+                                if (response[i].questionNumber === 5) {
+                                    $('#ComputerTechnologyQuestion5Number').text(response[i].questionNumber);
+                                    $('#ComputerTechnologyQuestion5Text').val(response[i].questionText);
+                                    $('#ComputerTechnologyQuestion5option1').val(response[i].option1);
+                                    $('#ComputerTechnologyQuestion5option2').val(response[i].option2);
+                                    $('#ComputerTechnologyQuestion5option3').val(response[i].option3);
+                                    4
+                                    $('#ComputerTechnologyQuestion5option1Label').text(response[i].option1);
+                                    $('#ComputerTechnologyQuestion5option2Label').text(response[i].option2);
+                                    $('#ComputerTechnologyQuestion5option3Label').text(response[i].option3);
+                                }
+
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        //alert("Error occured");//To avoid alerting if no internet connection.
+                        console.log(error);
+                    }
+                });
+            }
 
             function GetQuestionBySubjectsAndNumber(subject, number) {
                 $.ajax({
@@ -203,90 +498,6 @@
                 });
             }
 
-                function getGeneralKnowledgeQuestions() {
-                    let subject = "General Knowledge";
-                    $.ajax({
-                        url: '../api/question/GetQuestionBySubject',
-                        cache: false,
-                        type: 'GET',
-                        contentType: 'application/json',
-                        async: false,
-                        data: {
-                            subject: subject
-                        },
-                        success: function (response) {
-                            debugger;
-                            if (response !== null) {
-                                for (let i = 0; i < response.length; i++) {
-                                    if (response[i].questionNumber === 1) {
-                                        $('#GeneralKnowledgeQuestion1Number').text(response[i].questionNumber);
-                                        $('#GeneralKnowledgeQuestion1Text').val(response[i].questionText);
-                                        $('#GeneralKnowledgeQuestion1option1').val(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion1option2').val(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion1option3').val(response[i].option3);
-
-                                        $('#GeneralKnowledgeQuestion1option1Label').text(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion1option2Label').text(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion1option3Label').text(response[i].option3);
-                                    }
-
-                                    if (response[i].questionNumber === 2) {
-                                        $('#GeneralKnowledgeQuestion2Number').text(response[i].questionNumber);
-                                        $('#GeneralKnowledgeQuestion2Text').val(response[i].questionText);
-                                        $('#GeneralKnowledgeQuestion2option1').val(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion2option2').val(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion2option3').val(response[i].option3);
-
-                                        $('#GeneralKnowledgeQuestion2option1Label').text(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion2option2Label').text(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion2option3Label').text(response[i].option3);
-                                    }
-
-                                    if (response[i].questionNumber === 3) {
-                                        $('#GeneralKnowledgeQuestion3Number').text(response[i].questionNumber);
-                                        $('#GeneralKnowledgeQuestion3Text').val(response[i].questionText);
-                                        $('#GeneralKnowledgeQuestion3option1').val(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion3option2').val(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion3option3').val(response[i].option3);
-
-                                        $('#GeneralKnowledgeQuestion3option1Label').text(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion3option2Label').text(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion3option3Label').text(response[i].option3);
-                                    }
-
-                                    if (response[i].questionNumber === 4) {
-                                        $('#GeneralKnowledgeQuestion4Number').text(response[i].questionNumber);
-                                        $('#GeneralKnowledgeQuestion4Text').val(response[i].questionText);
-                                        $('#GeneralKnowledgeQuestion4option1').val(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion4option2').val(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion4option3').val(response[i].option3);
-                                                                    
-                                        $('#GeneralKnowledgeQuestion4option1Label').text(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion4option2Label').text(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion4option3Label').text(response[i].option3);
-                                    }
-
-                                    if (response[i].questionNumber === 5) {
-                                        $('#GeneralKnowledgeQuestion5Number').text(response[i].questionNumber);
-                                        $('#GeneralKnowledgeQuestion5Text').val(response[i].questionText);
-                                        $('#GeneralKnowledgeQuestion5option1').val(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion5option2').val(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion5option3').val(response[i].option3);
-                                        4                           
-                                        $('#GeneralKnowledgeQuestion5option1Label').text(response[i].option1);
-                                        $('#GeneralKnowledgeQuestion5option2Label').text(response[i].option2);
-                                        $('#GeneralKnowledgeQuestion5option3Label').text(response[i].option3);
-                                    }
-
-                                }
-                            }
-                        },
-                        error: function (error) {
-                            //alert("Error occured");//To avoid alerting if no internet connection.
-                            console.log(error);
-                        }
-                    });
-                }
         })
     </script>
 }
