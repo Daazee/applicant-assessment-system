@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApplicantAssessmentSystem.App.Models.Entities
+namespace ApplicantAssessmentSystem.App.Models.ViewModels
 {
-    public class ApplicantAnswerDetails
+    public class ApplicantAnswerDetailsViewModel
     {
         public int ApplicantAnswerDetailsId { get; set; }
         public int ApplicantAnswerSummaryId { get; set; }
@@ -16,6 +16,7 @@ namespace ApplicantAssessmentSystem.App.Models.Entities
         public int Score { get; set; }
 
         public int ApplicantId { get; set; }
+
         public string SelectedAnswer { get; set; }
         public string Subject { get; set; }
     }

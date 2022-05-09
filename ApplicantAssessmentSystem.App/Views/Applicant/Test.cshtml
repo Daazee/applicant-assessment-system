@@ -6,7 +6,7 @@
 <div class="pagetitle">
     <h1>Test</h1>
 </div><!-- End Page Title -->
-
+<input type="hidden" id="ApplicantId" value="@TempData["ApplicantId"] "  />
 <section class="section">
     <div class="row">
         <div class="col-lg-6">
@@ -167,6 +167,7 @@
             $('#startGeneralKnowledgeButton').click(function (e) {
                 debugger;
                 e.preventDefault();
+                 sessionStorage.setItem("ApplicantId", '@(ViewBag.ApplicantId)');
                 document.getElementById("general-knowledge-card").style.display = "block"
                 document.getElementById("startGeneralKnowledgeButton").style.display = "none";
                 getGeneralKnowledgeQuestions();
@@ -193,6 +194,7 @@
                 e.preventDefault();
                 document.getElementById("startMathematicsButton").disabled = false
                 document.getElementById("general-knowledge-card").style.display = "none"
+                saveGeneralKnowledgeAnswers();
             })
 
             $('#SubmitMathematics').click(function (e) {
@@ -497,6 +499,66 @@
                     }
                 });
             }
+
+
+            function saveGeneralKnowledgeAnswers(){
+                debugger;
+                let answers = [];
+
+                let subject = "General Knowledge";
+                var applicantAnswerSummaryId = 0;
+                var sessionId = 0;
+
+                var score = 0; ApplicantId
+                let applicantId = $('#ApplicantId').val();
+                
+                for (let i = 1; i <= 5; i++) {
+
+                    let questionNumberField = "GeneralKnowledgeQuestion"+ i + "Number";
+                    var questionNumber = $("#" + questionNumberField).text();
+
+                    let selectedAnswerField = "GeneralKnowledgeQuestion" + i + "Option";
+                    let selectedAnswer = $("input[type='radio'][name='" + selectedAnswerField + "']:checked").val();
+
+                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer);
+                    answers.push(answer);
+                }
+
+                if (answers.length > 0) {
+                    let request = JSON.stringify(answers);
+                    $.ajax({
+                        url: '../api/ApplicantAnswerDetails/saveAnswers',
+                        dataType: 'json',
+                        contentType: "application/json",
+                        type: "POST",
+                        data: request,
+                        success: function (response) {
+                            //$('#message').text("Record save successfully");
+                            //$('#TransactionNo').val(response.transNo);
+                            //$('#MyTrNo').val(response.transNo);
+                            //$('#CustomerTag').val(response.tag);
+                            //$('#TransactionNo').val(response.TransactionNo);
+                            //$('#CustomerTag').val(response.CustomerTag);
+                            alert("General Knowledge submitted successfully");
+                        }
+                    });
+                }
+
+            }
+
+            function prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer) {
+                debugger;
+                var self = this;
+
+                self.ApplicantAnswerSummaryId = applicantAnswerSummaryId;
+                self.SessionId = sessionId;
+                self.QuestionNumber = Number(questionNumber);
+                self.Score = score;
+                self.ApplicantId = Number(applicantId);
+                self.Subject = subject;
+                self.SelectedAnswer = selectedAnswer;
+            }
+
 
         })
     </script>

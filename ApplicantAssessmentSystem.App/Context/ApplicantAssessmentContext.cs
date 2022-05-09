@@ -18,5 +18,8 @@ namespace ApplicantAssessmentSystem.App.Context
         public DbSet<Applicant> Applicant { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<User> User { get; set; }
+
+        public DbSet<ApplicantAnswerSummary> ApplicantAnswerSummary { get; set; }
+        public DbSet<ApplicantAnswerDetails> ApplicantAnswerDetails { get; set; }
     }
 }

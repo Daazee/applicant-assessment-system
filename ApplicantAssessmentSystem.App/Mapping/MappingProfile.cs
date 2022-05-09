@@ -12,15 +12,19 @@ namespace ApplicantAssessmentSystem.App.Mapping
     {
         public MappingProfile()
         {
-            // Domain to DTOs
+            // Domain to DTOs or Domain to ViewModel
             CreateMap<Applicant, ApplicantViewModel>();
             CreateMap<Question, QuestionViewModel>();
+            CreateMap<ApplicantAnswerDetails, ApplicantAnswerDetailsViewModel>();
+            CreateMap<ApplicantAnswerSummary, ApplicantAnswerSummaryViewModel>();
             //.ForMember(dest => dest.StatusDisplay, opt => opt.MapFrom(src => src.Status == 0 ? "Draft" : "Closed"));
 
             // DTOs to Domain
 
             CreateMap<ApplicantViewModel, Applicant>();
             CreateMap<QuestionViewModel, Question>();
+            CreateMap<ApplicantAnswerDetailsViewModel, ApplicantAnswerDetails>();
+            CreateMap<ApplicantAnswerSummaryViewModel, ApplicantAnswerSummary>();
         }
     }
 }

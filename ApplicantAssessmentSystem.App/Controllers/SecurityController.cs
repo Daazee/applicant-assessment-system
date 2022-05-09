@@ -48,6 +48,7 @@ namespace ApplicantAssessmentSystem.App.Controllers
                         if (password == result.Password)
                         {
                             TempData["Username"] = username;
+                            TempData["UserId"] = result.UserId;
                             return RedirectToAction("Applicants", "Applicant");
                         }
                         else
@@ -93,6 +94,7 @@ namespace ApplicantAssessmentSystem.App.Controllers
                         if (password == result.Password)
                         {
                             TempData["Username"] = username;
+                            TempData["ApplicantId"] = result.ApplicantId;
                             return RedirectToAction("Test", "Applicant");
                         }
                         else
