@@ -167,7 +167,6 @@
             $('#startGeneralKnowledgeButton').click(function (e) {
                 debugger;
                 e.preventDefault();
-                 sessionStorage.setItem("ApplicantId", '@(ViewBag.ApplicantId)');
                 document.getElementById("general-knowledge-card").style.display = "block"
                 document.getElementById("startGeneralKnowledgeButton").style.display = "none";
                 getGeneralKnowledgeQuestions();
