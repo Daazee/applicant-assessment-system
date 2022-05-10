@@ -6,7 +6,7 @@
 <div class="pagetitle">
     <h1>Test</h1>
 </div><!-- End Page Title -->
-<input type="hidden" id="ApplicantId" value="@TempData["ApplicantId"] "  />
+<input type="hidden" id="ApplicantId" value="@TempData["ApplicantId"] " />
 <section class="section">
     <div class="row">
         <div class="col-lg-6">
@@ -167,9 +167,8 @@
             $('#startGeneralKnowledgeButton').click(function (e) {
                 debugger;
                 e.preventDefault();
-                document.getElementById("general-knowledge-card").style.display = "block"
-                document.getElementById("startGeneralKnowledgeButton").style.display = "none";
-                getGeneralKnowledgeQuestions();
+
+                getAnswerDetailByApplicantId();
             })
 
             $('#startMathematicsButton').click(function (e) {
@@ -500,7 +499,7 @@
             }
 
 
-            function saveGeneralKnowledgeAnswers(){
+            function saveGeneralKnowledgeAnswers() {
                 debugger;
                 let answers = [];
 
@@ -510,10 +509,10 @@
 
                 var score = 0; ApplicantId
                 let applicantId = $('#ApplicantId').val();
-                
+
                 for (let i = 1; i <= 5; i++) {
 
-                    let questionNumberField = "GeneralKnowledgeQuestion"+ i + "Number";
+                    let questionNumberField = "GeneralKnowledgeQuestion" + i + "Number";
                     var questionNumber = $("#" + questionNumberField).text();
 
                     let selectedAnswerField = "GeneralKnowledgeQuestion" + i + "Option";
@@ -558,6 +557,41 @@
                 self.SelectedAnswer = selectedAnswer;
             }
 
+            function getAnswerDetailByApplicantId() {
+                let applicantId = $('#ApplicantId').val();
+                $.ajax({
+                    url: '../api/ApplicantAnswerDetails/GetAnswerDetailByApplicantId',
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    async: false,
+                    data: {
+                        applicantId: Number(applicantId)
+                    },
+                    success: function (response) {
+                        debugger;
+                        if (response !== null) {
+                            if (response.length > 0) {
+                                alert("Applicant has already done the aptitude test. Kindly check applicant result");
+                            }
+                            else {
+                                document.getElementById("general-knowledge-card").style.display = "block"
+                                document.getElementById("startGeneralKnowledgeButton").style.display = "none";
+                                getGeneralKnowledgeQuestions();
+                            }
+                        }
+                        else {
+                            document.getElementById("general-knowledge-card").style.display = "block"
+                            document.getElementById("startGeneralKnowledgeButton").style.display = "none";
+                            getGeneralKnowledgeQuestions();
+                        }
+                    },
+                    error: function (error) {
+                        //alert("Error occured");//To avoid alerting if no internet connection.
+                        console.log(error);
+                    }
+                });
+            }
 
         })
     </script>

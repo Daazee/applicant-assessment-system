@@ -43,5 +43,13 @@ namespace ApplicantAssessmentSystem.App.ApiController
             }
 
         }
+
+        [Route("GetAnswerDetailByApplicantId")]
+        public async Task<IActionResult> GetAnswerDetailByApplicantId(int applicantId)
+        {
+            var answers = await _applicantAnswerDetailsRepository.GetTestScoreByApplicantId(applicantId);
+            var answersDTO = _mapper.Map<List<ApplicantAnswerDetails>, List<ApplicantAnswerDetailsViewModel>>(answers);
+            return Ok(answersDTO);
+        }
     }
 }
