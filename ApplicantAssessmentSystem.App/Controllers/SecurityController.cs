@@ -45,7 +45,7 @@ namespace ApplicantAssessmentSystem.App.Controllers
                     var result = await _userRepository.GetUserByUsername(username);
                     if (result != null)
                     {
-                        if (password == result.Password)
+                        if (Utility.HashPassword(password) == result.Password)
                         {
                             TempData["Username"] = username;
                             TempData["UserId"] = result.UserId;
@@ -91,7 +91,7 @@ namespace ApplicantAssessmentSystem.App.Controllers
                     var result = await _applicantRepository.GetApplicantByUsername(username);
                     if (result != null)
                     {
-                        if (password == result.Password)
+                        if (Utility.HashPassword(password) == result.Password)
                         {
                             TempData["Username"] = username;
                             TempData["ApplicantId"] = result.ApplicantId;

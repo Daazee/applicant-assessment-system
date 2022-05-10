@@ -55,6 +55,7 @@ namespace ApplicantAssessmentSystem.App.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    viewModel.Password = Utility.HashPassword(viewModel.Password);
                     var applicant = _mapper.Map<ApplicantViewModel, Applicant>(viewModel);
                     await _applicantRepository.AddItem(applicant);
 
