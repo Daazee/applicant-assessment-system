@@ -21,7 +21,7 @@
             <th scope="col">Highest Qualification</th>
             <th scope="col">Institution Name</th>
             <th scope="col">Graduation Year</th>
-            <th scope="col"></th>
+            @*<th scope="col"></th>*@
         </tr>
     </thead>
     <tbody>
@@ -43,11 +43,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.GraduationYear)
             </td>
-            <td>
+            @*<td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+            </td>*@
         </tr>
         }
         </tbody>
