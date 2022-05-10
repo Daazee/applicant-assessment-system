@@ -14,16 +14,23 @@ namespace ApplicantAssessmentSystem.App.Controllers
     public class ApplicantController : Controller
     {
         private readonly IApplicantRepository _applicantRepository;
+        private readonly IApplicantAnswerSummaryRepository _applicantAnswerSummaryRepository;
+        private readonly IApplicantAnswerDetailsRepository _applicantAnswerDetailsRepository;
+        private readonly IQuestionRepository _questionRepository;
         private readonly IMapper _mapper;
-        public ApplicantController(IApplicantRepository applicantRepository, IMapper mapper)
+        public ApplicantController(IApplicantRepository applicantRepository, IApplicantAnswerSummaryRepository applicantAnswerSummaryRepository,
+                                   IApplicantAnswerDetailsRepository applicantAnswerDetailsRepository, IQuestionRepository questionRepository, IMapper mapper)
         {
             _applicantRepository = applicantRepository;
+            _applicantAnswerSummaryRepository = applicantAnswerSummaryRepository;
+            _applicantAnswerDetailsRepository = applicantAnswerDetailsRepository;
+            _questionRepository = questionRepository;
             _mapper = mapper;
         }
         public async Task<ActionResult> Applicants()
         {
             var applicants = await _applicantRepository.GetItems();
-            var applicantsViewModel = _mapper.Map<List<Applicant>, List<ApplicantViewModel>>(applicants.ToList());            
+            var applicantsViewModel = _mapper.Map<List<Applicant>, List<ApplicantViewModel>>(applicants.ToList());
             return View(applicantsViewModel);
         }
 
@@ -49,12 +56,12 @@ namespace ApplicantAssessmentSystem.App.Controllers
                 if (ModelState.IsValid)
                 {
                     var applicant = _mapper.Map<ApplicantViewModel, Applicant>(viewModel);
-                   await _applicantRepository.AddItem(applicant);
+                    await _applicantRepository.AddItem(applicant);
 
                     return RedirectToAction(nameof(Applicants));
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -88,6 +95,66 @@ namespace ApplicantAssessmentSystem.App.Controllers
             }
             return View();
         }
+
+        public async Task<ActionResult> MyResult()
+        {
+            List<ApplicantAnswerSummaryViewModel> applicantScoreSummaryViewModel = new List<ApplicantAnswerSummaryViewModel>();
+            int applicantId = Convert.ToInt32(HttpContext.Session.GetString("ApplicantId"));
+            string applicantName = HttpContext.Session.GetString("ApplicantName");
+            ViewData["ApplicantName"] = applicantName;
+            var summaryScore = await _applicantAnswerSummaryRepository.GetTestScoreByApplicantId(applicantId);
+
+            if (summaryScore.Count() > 0)
+            {
+                applicantScoreSummaryViewModel = _mapper.Map<List<ApplicantAnswerSummary>, List<ApplicantAnswerSummaryViewModel>>(summaryScore);
+                return View(applicantScoreSummaryViewModel);
+            }
+
+
+            if (summaryScore.Count() == 0)
+            {
+                var scoreDetailsQuery = await _applicantAnswerDetailsRepository.GetTestScoreGroupByApplicantId(applicantId);
+                if (scoreDetailsQuery.Count() == 0)
+                {
+                    return View(null);
+                }
+
+
+                foreach (IGrouping<string, ApplicantAnswerDetails> group in scoreDetailsQuery)
+                {
+                    int subjectTotalScore = 0;
+                    int subjectTotalObatinable = 0;
+                    foreach (ApplicantAnswerDetails answer in group)
+                    {
+                        //Get question detail
+                        var questionDetail = await _questionRepository.GetQuestionBySubjectAndNumber(answer.Subject, answer.QuestionNumber);
+                        if (questionDetail != null)
+                        {
+                            subjectTotalObatinable += questionDetail.AttributedScore;
+                            if (questionDetail.Answer == answer.SelectedAnswer)
+                            {
+                                subjectTotalScore += questionDetail.AttributedScore;
+                            }
+                            else
+                            {
+                                subjectTotalScore += 0;
+                            }
+                        }
+                    }
+                    ApplicantAnswerSummary applicantAnswerSummary = new ApplicantAnswerSummary();
+                    applicantAnswerSummary.ApplicantId = applicantId;
+                    applicantAnswerSummary.ApplicantScore = subjectTotalScore;
+                    applicantAnswerSummary.SessionId = 0;
+                    applicantAnswerSummary.TotalObtainable = subjectTotalObatinable;
+                    applicantAnswerSummary.Subject = group.Key;
+                    await _applicantAnswerSummaryRepository.AddItem(applicantAnswerSummary);
+                    applicantScoreSummaryViewModel.Add(_mapper.Map<ApplicantAnswerSummary, ApplicantAnswerSummaryViewModel>(applicantAnswerSummary));
+                }
+
+            }
+            return View(applicantScoreSummaryViewModel);
+        }
+
 
         // GET: ApplicantController/Edit/5
         public ActionResult Edit(int id)

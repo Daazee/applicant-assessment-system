@@ -95,6 +95,8 @@ namespace ApplicantAssessmentSystem.App.Controllers
                         {
                             TempData["Username"] = username;
                             TempData["ApplicantId"] = result.ApplicantId;
+                            HttpContext.Session.SetString("ApplicantId", result.ApplicantId.ToString());
+                            HttpContext.Session.SetString("ApplicantName", $"{result.FirstName} {result.LastName}");
                             return RedirectToAction("Test", "Applicant");
                         }
                         else
@@ -108,7 +110,7 @@ namespace ApplicantAssessmentSystem.App.Controllers
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }

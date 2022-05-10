@@ -12,5 +12,10 @@ namespace ApplicantAssessmentSystem.App.Models.Entities
         public int SessionId { get; set; }
 
         public int ApplicantId { get; set; }
+
+        public int TotalObtainable { get; set; }
+        public int ApplicantScore { get; set; }
+
+        public string Subject { get; set; }
     }
 }

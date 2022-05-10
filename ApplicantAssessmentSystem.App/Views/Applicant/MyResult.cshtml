@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ApplicantAssessmentSystem.App.Models.ViewModels.ApplicantAnswerSummaryViewModel>
+
+@{
+    ViewData["Title"] = "MyResult";
+    Layout = "~/Views/Shared/AssessmentApplicant_Layout.cshtml";
+}
+
+<h1>My Result</h1>
+
+<table class="table datatable">
+    <thead>
+        <tr>
+
+            <th>
+                Applicant Id
+            </th>
+            <th>
+                Applicant Name
+            </th>
+            <th>
+                Total Obtainable Score
+            </th>
+            <th>
+                Applicant Score
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicantId)
+                    </td>
+                    <td>
+                        @ViewData["ApplicantName"]
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalObtainable)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicantScore)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

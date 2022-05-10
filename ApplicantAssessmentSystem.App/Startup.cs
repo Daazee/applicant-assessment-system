@@ -26,6 +26,9 @@ namespace ApplicantAssessmentSystem.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromHours(5);// to be changed later
+            });
             string connection = "data source=localhost; Initial Catalog=Laundry; Integrated Security=True";
             //services.AddDbContext<QueuingSystemContext>(options => options.UseSqlServer(connection));
             //services.AddDbContext<ApplicantAssessmentContext>(options => options.(connection));
@@ -33,7 +36,8 @@ namespace ApplicantAssessmentSystem.App
             services.AddScoped<Repository.IApplicantRepository, DAL.ApplicantRepository>();
             services.AddScoped<Repository.IQuestionRepository, DAL.QuestionRepository>();
             services.AddScoped<Repository.IUserRepository, DAL.UserRepository>();
-                services.AddScoped<Repository.IApplicantAnswerDetailsRepository, DAL.ApplicantAnswerDetailsRepository>();
+            services.AddScoped<Repository.IApplicantAnswerDetailsRepository, DAL.ApplicantAnswerDetailsRepository>();
+            services.AddScoped<Repository.IApplicantAnswerSummaryRepository, DAL.ApplicantAnswerSummaryRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
 
@@ -56,7 +60,7 @@ namespace ApplicantAssessmentSystem.App
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
