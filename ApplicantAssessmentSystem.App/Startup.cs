@@ -2,6 +2,7 @@ using ApplicantAssessmentSystem.App.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +33,9 @@ namespace ApplicantAssessmentSystem.App
             string connection = "data source=localhost; Initial Catalog=Laundry; Integrated Security=True";
             //services.AddDbContext<QueuingSystemContext>(options => options.UseSqlServer(connection));
             //services.AddDbContext<ApplicantAssessmentContext>(options => options.(connection));
+
+            string connectionstring = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContextPool<ApplicantAssessmentContext>(options => options.UseMySql(connectionstring, ServerVersion.AutoDetect(connectionstring)));
 
             services.AddScoped<Repository.IApplicantRepository, DAL.ApplicantRepository>();
             services.AddScoped<Repository.IQuestionRepository, DAL.QuestionRepository>();
