@@ -1,4 +1,5 @@
-﻿using ApplicantAssessmentSystem.App.Models.Entities;
+﻿using ApplicantAssessmentSystem.App.Context;
+using ApplicantAssessmentSystem.App.Models.Entities;
 using ApplicantAssessmentSystem.App.Models.ViewModels;
 using ApplicantAssessmentSystem.App.Repository;
 using AutoMapper;
@@ -15,13 +16,15 @@ namespace ApplicantAssessmentSystem.App.ApiController
     [ApiController]
     public class ApplicantAnswerDetailsController : ControllerBase
     {
+        private readonly ApplicantAssessmentContext _applicantAssessmentContext;
         private readonly IApplicantAnswerDetailsRepository _applicantAnswerDetailsRepository;
         private readonly IMapper _mapper;
         private readonly IQuestionRepository _questionRepository;
         private readonly IApplicantAnswerSummaryRepository _applicantAnswerSummaryRepository;
-        public ApplicantAnswerDetailsController(IApplicantAnswerDetailsRepository applicantAnswerDetailsRepository, IQuestionRepository questionRepository,
+        public ApplicantAnswerDetailsController(ApplicantAssessmentContext applicantAssessmentContext, IApplicantAnswerDetailsRepository applicantAnswerDetailsRepository, IQuestionRepository questionRepository,
                                                 IApplicantAnswerSummaryRepository applicantAnswerSummaryRepository, IMapper mapper)
         {
+            _applicantAssessmentContext = applicantAssessmentContext;
             _applicantAnswerDetailsRepository = applicantAnswerDetailsRepository;
             _questionRepository = questionRepository;
             _applicantAnswerSummaryRepository = applicantAnswerSummaryRepository;

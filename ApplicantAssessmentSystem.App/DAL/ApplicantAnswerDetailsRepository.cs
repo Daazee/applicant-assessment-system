@@ -10,9 +10,10 @@ namespace ApplicantAssessmentSystem.App.DAL
 {
     public class ApplicantAnswerDetailsRepository : BaseRepository<ApplicantAnswerDetails>, IApplicantAnswerDetailsRepository
     {
-        public ApplicantAnswerDetailsRepository()
+        private ApplicantAssessmentContext context;
+        public ApplicantAnswerDetailsRepository(ApplicantAssessmentContext context) : base(context)
         {
-
+            this.context = context;
         }
 
         public async Task<List<ApplicantAnswerDetails>> GetTestScoreByApplicantId(int applicantId)
@@ -27,6 +28,6 @@ namespace ApplicantAssessmentSystem.App.DAL
             return await Task.FromResult(query);
         }
 
-        ApplicantAssessmentContext context = ContextManager.GetContext();
+       // ApplicantAssessmentContext context = ContextManager.GetContext();
     }
 }

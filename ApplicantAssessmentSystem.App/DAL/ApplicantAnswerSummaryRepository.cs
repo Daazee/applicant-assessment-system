@@ -10,14 +10,14 @@ namespace ApplicantAssessmentSystem.App.DAL
 {
     public class ApplicantAnswerSummaryRepository : BaseRepository<ApplicantAnswerSummary>, IApplicantAnswerSummaryRepository
     {
-        public ApplicantAnswerSummaryRepository()
+        private ApplicantAssessmentContext context;
+        public ApplicantAnswerSummaryRepository(ApplicantAssessmentContext context) : base(context)
         {
-
+            this.context = context;
         }
 
 
-
-        ApplicantAssessmentContext context = ContextManager.GetContext();
+        //ApplicantAssessmentContext context = ContextManager.GetContext();
 
         public async Task<List<ApplicantAnswerSummary>> GetTestScoreByApplicantId(int applicantId)
         {

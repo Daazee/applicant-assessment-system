@@ -1,4 +1,5 @@
-﻿using ApplicantAssessmentSystem.App.Repository;
+﻿using ApplicantAssessmentSystem.App.Context;
+using ApplicantAssessmentSystem.App.Repository;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,13 +12,15 @@ namespace ApplicantAssessmentSystem.App.Controllers
 {
     public class SecurityController : Controller
     {
+        private readonly ApplicantAssessmentContext _applicantAssessmentContext;
         private readonly IApplicantRepository _applicantRepository;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
 
 
-        public SecurityController(IApplicantRepository applicantRepository, IUserRepository userRepository, IMapper mapper)
+        public SecurityController(ApplicantAssessmentContext applicantAssessmentContext, IApplicantRepository applicantRepository, IUserRepository userRepository, IMapper mapper)
         {
+            _applicantAssessmentContext = applicantAssessmentContext;
             _applicantRepository = applicantRepository;
             _userRepository = userRepository;
             _mapper = mapper;

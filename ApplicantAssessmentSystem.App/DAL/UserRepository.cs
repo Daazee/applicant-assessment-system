@@ -10,8 +10,14 @@ namespace ApplicantAssessmentSystem.App.DAL
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
+        private ApplicantAssessmentContext context;
+        public UserRepository(ApplicantAssessmentContext context) : base(context)
+        {
+            this.context = context;
+        }
 
-        ApplicantAssessmentContext context = ContextManager.GetContext();
+
+        //ApplicantAssessmentContext context = ContextManager.GetContext();
         public async Task<User> GetUserByUsername(string username)
         {
             User user = context.User.Where(c => c.Username == username).FirstOrDefault();

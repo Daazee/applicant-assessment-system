@@ -1,4 +1,5 @@
-﻿using ApplicantAssessmentSystem.App.Models.Entities;
+﻿using ApplicantAssessmentSystem.App.Context;
+using ApplicantAssessmentSystem.App.Models.Entities;
 using ApplicantAssessmentSystem.App.Models.ViewModels;
 using ApplicantAssessmentSystem.App.Repository;
 using AutoMapper;
@@ -13,11 +14,13 @@ namespace ApplicantAssessmentSystem.App.Controllers
 {
     public class QuestionController : Controller
     {
+        private readonly ApplicantAssessmentContext _applicantAssessmentContext;
         private readonly IQuestionRepository _questionRepository;
         private readonly IMapper _mapper;
       
-        public QuestionController(IQuestionRepository questionRepository, IMapper mapper)
+        public QuestionController(ApplicantAssessmentContext applicantAssessmentContext, IQuestionRepository questionRepository, IMapper mapper)
         {
+            _applicantAssessmentContext = applicantAssessmentContext;
             _questionRepository = questionRepository;
             _mapper = mapper;
         }

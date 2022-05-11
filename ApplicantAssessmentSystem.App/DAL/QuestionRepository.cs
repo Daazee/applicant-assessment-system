@@ -10,14 +10,14 @@ namespace ApplicantAssessmentSystem.App.DAL
 {
     public class QuestionRepository : BaseRepository<Question>, IQuestionRepository
     {
-        public QuestionRepository()
+        private ApplicantAssessmentContext context;
+        public QuestionRepository(ApplicantAssessmentContext context) : base(context)
         {
-
+            this.context = context;
         }
 
 
-
-        ApplicantAssessmentContext context = ContextManager.GetContext();
+        //ApplicantAssessmentContext context = ContextManager.GetContext();
 
         public async Task<Question> GetQuestionBySubjectAndNumber(string subject, int number)
         {

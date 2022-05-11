@@ -19,10 +19,24 @@ namespace ApplicantAssessmentSystem.App.Context
         public static ApplicantAssessmentContext GetContext()
         {
             //var connectionstring = Configuration.GetConnectionString("QueuingSystemContext");
-            var connectionstring = "data source=localhost; Initial Catalog=assessment; Integrated Security=True;";
+            //var connectionstring = "data source=localhost; Initial Catalog=assessment; Integrated Security=True;";
+            string connectionstring = Configuration.GetConnectionString("DefaultConnection");
+
+
+
+
+
+            //var optionsBuilder = new DbContextOptionsBuilder<ApplicantAssessmentContext>();
+            //optionsBuilder.UseSqlServer(connectionstring);
+
             var optionsBuilder = new DbContextOptionsBuilder<ApplicantAssessmentContext>();
-            optionsBuilder.UseSqlServer(connectionstring);
+            optionsBuilder.UseMySql(connectionstring, ServerVersion.AutoDetect(connectionstring));
+
+
             ApplicantAssessmentContext context = new ApplicantAssessmentContext(optionsBuilder.Options);
+
+            //services.AddDbContextPool<MyDBContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
+
             return context;
         }
     }
