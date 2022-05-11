@@ -72,6 +72,8 @@ namespace ApplicantAssessmentSystem.App.Controllers
         // GET: ApplicantController/Create
         public ActionResult Test()
         {
+            int applicantId = Convert.ToInt32(HttpContext.Session.GetString("ApplicantId"));
+            TempData["ApplicantId"] = applicantId;
             return View();
         }
 
@@ -86,7 +88,7 @@ namespace ApplicantAssessmentSystem.App.Controllers
                 {
                     var applicant = _mapper.Map<ApplicantViewModel, Applicant>(viewModel);
                     await _applicantRepository.AddItem(applicant);
-
+                                      
                     return RedirectToAction(nameof(Applicants));
                 }
             }

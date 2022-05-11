@@ -6,7 +6,7 @@
 <div class="pagetitle">
     <h1>Test</h1>
 </div><!-- End Page Title -->
-<input type="hidden" id="ApplicantId" value="@TempData["ApplicantId"] " />
+<input type="hidden" id="ApplicantId" value="@TempData["ApplicantId"]" />
 <section class="section">
     <div class="row">
         <div class="col-lg-6">
@@ -154,8 +154,293 @@
 
                 </div>
             </div>
-            @await Html.PartialAsync("_Mathematics")
-            @await Html.PartialAsync("_ComputerTechnology")
+            @*@Html.Partial("_Mathematics")*@
+            <div class="card" id="mathematics-card" style="display:none">
+                <div class="card-body">
+
+                    <h5 class="card-title" id="subjectTitle">Mathematics</h5>
+                    <!-- Horizontal Form -->
+                    <form>
+                        <div id="Mathematics1">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="MathematicsQuestion1Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="MathematicsQuestion1Text" readonly>
+                                </div>
+                            </div>
+
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion1Option" id="MathematicsQuestion1option1" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion1option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion1Option" id="MathematicsQuestion1option2" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion1option2Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion1Option" id="MathematicsQuestion1option3" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion1option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div id="Mathematics2">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="MathematicsQuestion2Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="MathematicsQuestion2Text" readonly>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-20">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion2Option" id="MathematicsQuestion2option1" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion2option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion2Option" id="MathematicsQuestion2option2" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion2option2Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion2Option" id="MathematicsQuestion2option3" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion2option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div id="Mathematics3">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="MathematicsQuestion3Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="MathematicsQuestion3Text" readonly>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-20">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion3Option" id="MathematicsQuestion3option1" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion3option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion3Option" id="MathematicsQuestion3option2" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion3option2Label"> </label>
+                                        <a href="D:\sandbox\net\applicant-assessment-system\ApplicantAssessmentSystem.App\Views\Applicant\Mathematics.cshtml">D:\sandbox\net\applicant-assessment-system\ApplicantAssessmentSystem.App\Views\Applicant\Mathematics.cshtml</a>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion3Option" id="MathematicsQuestion3option3" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion3option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div id="Mathematics4">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="MathematicsQuestion4Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="MathematicsQuestion4Text" readonly>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-20">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion4Option" id="MathematicsQuestion4option1" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion4option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion4Option" id="MathematicsQuestion4option2" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion4option2Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion4Option" id="MathematicsQuestion4option3" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion4option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div id="Mathematics5">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="MathematicsQuestion5Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="MathematicsQuestion5Text" readonly>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-20">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion5Option" id="MathematicsQuestion5option1" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion5option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion5Option" id="MathematicsQuestion5option2" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion5option2Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="MathematicsQuestion5Option" id="MathematicsQuestion5option3" value="">
+                                        <label class="form-check-label" id="MathematicsQuestion5option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" id="SubmitMathematics">Submit Mathematics</button>
+                        </div>
+                    </form><!-- End Horizontal Form -->
+
+                </div>
+            </div>
+            @*@Html.PartialAsync("_ComputerTechnology")*@
+            <div class="card" id="computer-technology-card" style="display:none">
+                <div class="card-body">
+
+                    <h5 class="card-title" id="subjectTitle">Computer Technology</h5>
+                    <!-- Horizontal Form -->
+                    <form>
+                        <div id="ComputerTechnology1">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="ComputerTechnologyQuestion1Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="ComputerTechnologyQuestion1Text" readonly>
+                                </div>
+                            </div>
+
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion1Option" id="ComputerTechnologyQuestion1option1" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion1option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion1Option" id="ComputerTechnologyQuestion1option2" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion1option2Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion1Option" id="ComputerTechnologyQuestion1option3" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion1option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div id="ComputerTechnology2">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="ComputerTechnologyQuestion2Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="ComputerTechnologyQuestion2Text" readonly>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-20">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion2Option" id="ComputerTechnologyQuestion2option1" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion2option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion2Option" id="ComputerTechnologyQuestion2option2" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion2option2Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion2Option" id="ComputerTechnologyQuestion2option3" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion2option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div id="ComputerTechnology3">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="ComputerTechnologyQuestion3Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="ComputerTechnologyQuestion3Text" readonly>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-20">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion3Option" id="ComputerTechnologyQuestion3option1" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion3option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion3Option" id="ComputerTechnologyQuestion3option2" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion3option2Label"> </label>
+                                        <a href="D:\sandbox\net\applicant-assessment-system\ApplicantAssessmentSystem.App\Views\Applicant\ComputerTechnology.cshtml">D:\sandbox\net\applicant-assessment-system\ApplicantAssessmentSystem.App\Views\Applicant\ComputerTechnology.cshtml</a>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion3Option" id="ComputerTechnologyQuestion3option3" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion3option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div id="ComputerTechnology4">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="ComputerTechnologyQuestion4Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="ComputerTechnologyQuestion4Text" readonly>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-20">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion4Option" id="ComputerTechnologyQuestion4option1" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion4option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion4Option" id="ComputerTechnologyQuestion4option2" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion4option2Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion4Option" id="ComputerTechnologyQuestion4option3" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion4option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div id="ComputerTechnology5">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" id="ComputerTechnologyQuestion5Number"></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="ComputerTechnologyQuestion5Text" readonly>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-sm-20">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion5Option" id="ComputerTechnologyQuestion5option1" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion5option1Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion5Option" id="ComputerTechnologyQuestion5option2" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion5option2Label"> </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ComputerTechnologyQuestion5Option" id="ComputerTechnologyQuestion5option3" value="">
+                                        <label class="form-check-label" id="ComputerTechnologyQuestion5option3Label"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" id="SubmitComputerTechnology">Submit Computer Technology</button>
+                        </div>
+                    </form><!-- End Horizontal Form -->
+
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -200,6 +485,7 @@
                 e.preventDefault();
                 document.getElementById("startComputerTechnologyButton").disabled = false
                 document.getElementById("mathematics-card").style.display = "none"
+                saveMathematicsAnswers()
             })
 
             $('#SubmitComputerTechnology').click(function (e) {
@@ -207,6 +493,7 @@
                 e.preventDefault();
                 // document.getElementById("startMathematics").disabled = false
                 document.getElementById("computer-technology-card").style.display = "none"
+                saveComputerTechnologyAnswers()
             })
 
 
@@ -531,13 +818,85 @@
                         type: "POST",
                         data: request,
                         success: function (response) {
-                            //$('#message').text("Record save successfully");
-                            //$('#TransactionNo').val(response.transNo);
-                            //$('#MyTrNo').val(response.transNo);
-                            //$('#CustomerTag').val(response.tag);
-                            //$('#TransactionNo').val(response.TransactionNo);
-                            //$('#CustomerTag').val(response.CustomerTag);
                             alert("General Knowledge submitted successfully");
+                        }
+                    });
+                }
+
+            }
+
+            function saveMathematicsAnswers() {
+                debugger;
+                let answers = [];
+
+                let subject = "Mathematics";
+                var applicantAnswerSummaryId = 0;
+                var sessionId = 0;
+
+                var score = 0; ApplicantId
+                let applicantId = $('#ApplicantId').val();
+
+                for (let i = 1; i <= 5; i++) {
+
+                    let questionNumberField = "MathematicsQuestion" + i + "Number";
+                    var questionNumber = $("#" + questionNumberField).text();
+
+                    let selectedAnswerField = "MathematicsQuestion" + i + "Option";
+                    let selectedAnswer = $("input[type='radio'][name='" + selectedAnswerField + "']:checked").val();
+
+                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer);
+                    answers.push(answer);
+                }
+
+                if (answers.length > 0) {
+                    let request = JSON.stringify(answers);
+                    $.ajax({
+                        url: '../api/ApplicantAnswerDetails/saveAnswers',
+                        dataType: 'json',
+                        contentType: "application/json",
+                        type: "POST",
+                        data: request,
+                        success: function (response) {
+                            alert("Mathematics submitted successfully");
+                        }
+                    });
+                }
+
+            }
+
+            function saveComputerTechnologyAnswers() {
+                debugger;
+                let answers = [];
+
+                let subject = "Computer Technology";
+                var applicantAnswerSummaryId = 0;
+                var sessionId = 0;
+
+                var score = 0; ApplicantId
+                let applicantId = $('#ApplicantId').val();
+
+                for (let i = 1; i <= 5; i++) {
+
+                    let questionNumberField = "ComputerTechnologyQuestion" + i + "Number";
+                    var questionNumber = $("#" + questionNumberField).text();
+
+                    let selectedAnswerField = "ComputerTechnologyQuestion" + i + "Option";
+                    let selectedAnswer = $("input[type='radio'][name='" + selectedAnswerField + "']:checked").val();
+
+                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer);
+                    answers.push(answer);
+                }
+
+                if (answers.length > 0) {
+                    let request = JSON.stringify(answers);
+                    $.ajax({
+                        url: '../api/ApplicantAnswerDetails/saveAnswers',
+                        dataType: 'json',
+                        contentType: "application/json",
+                        type: "POST",
+                        data: request,
+                        success: function (response) {
+                            alert("Computer Knowledge submitted successfully");
                         }
                     });
                 }
