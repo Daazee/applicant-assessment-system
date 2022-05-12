@@ -805,7 +805,7 @@
                     let selectedAnswerField = "GeneralKnowledgeQuestion" + i + "Option";
                     let selectedAnswer = $("input[type='radio'][name='" + selectedAnswerField + "']:checked").val();
 
-                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer);
+                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer, false);
                     answers.push(answer);
                 }
 
@@ -844,7 +844,7 @@
                     let selectedAnswerField = "MathematicsQuestion" + i + "Option";
                     let selectedAnswer = $("input[type='radio'][name='" + selectedAnswerField + "']:checked").val();
 
-                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer);
+                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer, false);
                     answers.push(answer);
                 }
 
@@ -883,10 +883,10 @@
                     let selectedAnswerField = "ComputerTechnologyQuestion" + i + "Option";
                     let selectedAnswer = $("input[type='radio'][name='" + selectedAnswerField + "']:checked").val();
 
-                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer);
+                    let answer = new prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer, true);
                     answers.push(answer);
                 }
-
+                alert("All test completed successfully.");
                 if (answers.length > 0) {
                     let request = JSON.stringify(answers);
                     $.ajax({
@@ -896,14 +896,19 @@
                         type: "POST",
                         data: request,
                         success: function (response) {
-                            alert("Computer Knowledge submitted successfully");
+                            debugger
+                            console.log(response)
+                            if(response === "pass")
+                                alert("You Passed. Please check result details");
+                            else
+                                alert("You Failed. Please check result details");
                         }
                     });
                 }
 
             }
 
-            function prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer) {
+            function prepareAnswerObject(applicantAnswerSummaryId, sessionId, questionNumber, score, applicantId, subject, selectedAnswer, isLastSubject) {
                 debugger;
                 var self = this;
 
@@ -914,6 +919,7 @@
                 self.ApplicantId = Number(applicantId);
                 self.Subject = subject;
                 self.SelectedAnswer = selectedAnswer;
+                self.IsLastSubject = isLastSubject;
             }
 
             function getAnswerDetailByApplicantId() {

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ApplicantAssessmentSystem.App.Models.ViewModels.TransferViewModel>
+
+@{
+    ViewData["Title"] = "TransferApplicants";
+    Layout = "~/Views/Shared/AssessmentApplicant_Layout.cshtml";
+}
+
+<h1>Transferred Applicants</h1>
+
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th>
+              Applicant Id
+            </th>
+            <th>
+               Applicant Name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicantId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicantFullName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

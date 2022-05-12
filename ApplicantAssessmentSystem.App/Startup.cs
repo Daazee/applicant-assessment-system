@@ -42,6 +42,7 @@ namespace ApplicantAssessmentSystem.App
             services.AddScoped<Repository.IUserRepository, DAL.UserRepository>();
             services.AddScoped<Repository.IApplicantAnswerDetailsRepository, DAL.ApplicantAnswerDetailsRepository>();
             services.AddScoped<Repository.IApplicantAnswerSummaryRepository, DAL.ApplicantAnswerSummaryRepository>();
+            services.AddScoped<Repository.ITransferRepository, DAL.TransferRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
 

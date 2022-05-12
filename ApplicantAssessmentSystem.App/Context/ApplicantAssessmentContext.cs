@@ -21,5 +21,7 @@ namespace ApplicantAssessmentSystem.App.Context
 
         public DbSet<ApplicantAnswerSummary> ApplicantAnswerSummary { get; set; }
         public DbSet<ApplicantAnswerDetails> ApplicantAnswerDetails { get; set; }
+
+        public DbSet<Transfer> Transfer { get; set; }
     }
 }

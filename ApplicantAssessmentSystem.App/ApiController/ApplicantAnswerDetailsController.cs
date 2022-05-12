@@ -21,13 +21,15 @@ namespace ApplicantAssessmentSystem.App.ApiController
         private readonly IMapper _mapper;
         private readonly IQuestionRepository _questionRepository;
         private readonly IApplicantAnswerSummaryRepository _applicantAnswerSummaryRepository;
+        private readonly ITransferRepository _transferRepository;
         public ApplicantAnswerDetailsController(ApplicantAssessmentContext applicantAssessmentContext, IApplicantAnswerDetailsRepository applicantAnswerDetailsRepository, IQuestionRepository questionRepository,
-                                                IApplicantAnswerSummaryRepository applicantAnswerSummaryRepository, IMapper mapper)
+                                                IApplicantAnswerSummaryRepository applicantAnswerSummaryRepository, ITransferRepository transferRepository, IMapper mapper)
         {
             _applicantAssessmentContext = applicantAssessmentContext;
             _applicantAnswerDetailsRepository = applicantAnswerDetailsRepository;
             _questionRepository = questionRepository;
             _applicantAnswerSummaryRepository = applicantAnswerSummaryRepository;
+            _transferRepository = transferRepository;
             _mapper = mapper;
         }
 
@@ -72,11 +74,41 @@ namespace ApplicantAssessmentSystem.App.ApiController
                 applicantAnswerSummary.TotalObtainable = subjectTotalObatinable;
                 applicantAnswerSummary.Subject = answerDetailsViewModels.First().Subject;
                 await _applicantAnswerSummaryRepository.AddItem(applicantAnswerSummary);
+
+                if (answerDetailsViewModels.First().IsLastSubject == true)//calculate average to move to pass student
+                {
+                    var summaryScore = await _applicantAnswerSummaryRepository.GetTestScoreByApplicantId(answerDetailsViewModels.First().ApplicantId);
+                    if (summaryScore.Count() > 0)
+                    {
+
+                        double totalApplicantScore = 0;
+                        double totalObatinableScore = 0;
+
+
+                        foreach (var summary in summaryScore)
+                        {
+                            totalApplicantScore += summary.ApplicantScore;
+                            totalObatinableScore += summary.TotalObtainable;
+                        }
+
+                        //calculate percentage
+                        double applicantScorePercentage = totalApplicantScore / totalObatinableScore * 100;
+
+                        if (applicantScorePercentage > 50.0)
+                        {
+                            Transfer transfer = new Transfer();
+                            transfer.ApplicantId = answerDetailsViewModels.First().ApplicantId;
+                            await _transferRepository.AddItem(transfer);
+                            return Ok("pass");
+                        }
+                        else
+                            return Ok("fail");
+                    }
+                }
                 return Ok("success");
             }
             catch (Exception)
             {
-
                 throw;
             }
 

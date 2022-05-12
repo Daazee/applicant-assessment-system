@@ -19,5 +19,7 @@ namespace ApplicantAssessmentSystem.App.Models.ViewModels
 
         public string SelectedAnswer { get; set; }
         public string Subject { get; set; }
+
+        public bool IsLastSubject { get; set; }
     }
 }

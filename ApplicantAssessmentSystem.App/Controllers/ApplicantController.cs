@@ -20,14 +20,17 @@ namespace ApplicantAssessmentSystem.App.Controllers
         private readonly IApplicantAnswerDetailsRepository _applicantAnswerDetailsRepository;
         private readonly IQuestionRepository _questionRepository;
         private readonly IMapper _mapper;
+        private readonly ITransferRepository _transferRepository;
         public ApplicantController(ApplicantAssessmentContext applicantAssessmentContext, IApplicantRepository applicantRepository, IApplicantAnswerSummaryRepository applicantAnswerSummaryRepository,
-                                   IApplicantAnswerDetailsRepository applicantAnswerDetailsRepository, IQuestionRepository questionRepository, IMapper mapper)
+                                   IApplicantAnswerDetailsRepository applicantAnswerDetailsRepository, IQuestionRepository questionRepository,
+                                   ITransferRepository transferRepository, IMapper mapper)
         {
             _applicantAssessmentContext = applicantAssessmentContext;
             _applicantRepository = applicantRepository;
             _applicantAnswerSummaryRepository = applicantAnswerSummaryRepository;
             _applicantAnswerDetailsRepository = applicantAnswerDetailsRepository;
             _questionRepository = questionRepository;
+            _transferRepository = transferRepository;
             _mapper = mapper;
         }
         public async Task<ActionResult> Applicants()
@@ -91,7 +94,7 @@ namespace ApplicantAssessmentSystem.App.Controllers
                 {
                     var applicant = _mapper.Map<ApplicantViewModel, Applicant>(viewModel);
                     await _applicantRepository.AddItem(applicant);
-                                      
+
                     return RedirectToAction(nameof(Applicants));
                 }
             }
@@ -116,7 +119,8 @@ namespace ApplicantAssessmentSystem.App.Controllers
                 return View(applicantScoreSummaryViewModel);
             }
 
-
+            //Not needed anymore. Done while applicant submits each subject
+            /* 
             if (summaryScore.Count() == 0)
             {
                 var scoreDetailsQuery = await _applicantAnswerDetailsRepository.GetTestScoreGroupByApplicantId(applicantId);
@@ -157,11 +161,15 @@ namespace ApplicantAssessmentSystem.App.Controllers
                     applicantScoreSummaryViewModel.Add(_mapper.Map<ApplicantAnswerSummary, ApplicantAnswerSummaryViewModel>(applicantAnswerSummary));
                 }
 
-            }
+            }*/
             return View(applicantScoreSummaryViewModel);
         }
-
-
+        public async Task<ActionResult> TransferApplicants()
+        {
+            var transferredApplicants = await _transferRepository.GetItems();
+            var transferredApplicantsViewModel = _mapper.Map<List<Transfer>, List<TransferViewModel>>(transferredApplicants.ToList());
+            return View(transferredApplicantsViewModel);
+        }
         // GET: ApplicantController/Edit/5
         public ActionResult Edit(int id)
         {
