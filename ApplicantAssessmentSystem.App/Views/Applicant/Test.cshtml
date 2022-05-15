@@ -7,6 +7,11 @@
     <h1>Test</h1>
 </div><!-- End Page Title -->
 <input type="hidden" id="ApplicantId" value="@TempData["ApplicantId"]" />
+<input type="hidden" id="currentSubject" value="" />
+<div id="testTimer" style="display:none">
+    <label id="minute"></label>:
+    <label id="second"></label>
+</div>
 <section class="section">
     <div class="row">
         <div class="col-lg-6">
@@ -449,54 +454,120 @@
     <script>
         $(document).ready(function () {
 
+            function timer() {
+                document.getElementById("testTimer").style.display = "block"
+                document.getElementById("minute").innerText = "1";
+                document.getElementById("second").innerText = "59";
+                const myTimeout = setInterval(function () {
+                    let minute = Number(document.getElementById("minute").innerText);
+                    let second = Number(document.getElementById("second").innerText);
+
+                    second = second - 1;
+                    let secondStringValue = second.toString();
+                    if (secondStringValue.length === 1)
+                        secondStringValue = "0" + secondStringValue;
+                    document.getElementById("second").innerText = secondStringValue;
+
+
+                    if (second === 0) {
+                        //check current minute
+                        let currentMinute = Number(document.getElementById("minute").innerText);
+
+                        if (currentMinute === 0) {
+                            clearTimeout(myTimeout);
+                            //submit test for the ongoin subject
+                            let currentSubject = $('#currentSubject').val();
+                            debugger;
+                            if (currentSubject === "General Knowledge") {
+                                submitGeneralKnowledge();
+                            }
+                            else if (currentSubject === "Mathematics") {
+                                submitMathematics();
+                            }
+                            else if (currentSubject === "Computer Technology") {
+                                submitComputerTechnology();
+                            }
+                        }
+
+                        if (currentMinute > 0) {
+                            document.getElementById("second").innerText = "59";
+                        }
+
+                        minute = minute - 1;
+
+                        let minuteStringValue = second.toString();
+                        if (minuteStringValue.length === 1)
+                            minuteStringValue = "0" + minuteStringValue;
+                        document.getElementById("minute").innerText = minuteStringValue;
+
+                    }
+
+                }, 1000);
+            }
+
             $('#startGeneralKnowledgeButton').click(function (e) {
                 debugger;
                 e.preventDefault();
-
+                $('#currentSubject').val("General Knowledge");
                 getAnswerDetailByApplicantId();
+                //timer(); // timer call after checking if candidate has doe the test or not
             })
 
             $('#startMathematicsButton').click(function (e) {
                 debugger;
                 e.preventDefault();
+                $('#currentSubject').val("Mathematics");
                 document.getElementById("mathematics-card").style.display = "block"
                 document.getElementById("startMathematicsButton").style.display = "none";
                 getMathematicsQuestions();
+                timer();
             })
 
             $('#startComputerTechnologyButton').click(function (e) {
                 debugger;
                 e.preventDefault();
+                $('#currentSubject').val("Computer Technology");
                 document.getElementById("computer-technology-card").style.display = "block"
                 document.getElementById("startComputerTechnologyButton").style.display = "none";
                 getComputerTechnologyQuestions();
+                timer();
             })
 
             $('#SubmitGeneralKnowledge').click(function (e) {
                 debugger;
                 e.preventDefault();
-                document.getElementById("startMathematicsButton").disabled = false
-                document.getElementById("general-knowledge-card").style.display = "none"
-                saveGeneralKnowledgeAnswers();
+                submitGeneralKnowledge();
             })
 
             $('#SubmitMathematics').click(function (e) {
                 debugger;
                 e.preventDefault();
-                document.getElementById("startComputerTechnologyButton").disabled = false
-                document.getElementById("mathematics-card").style.display = "none"
-                saveMathematicsAnswers()
+                submitMathematics();
             })
 
             $('#SubmitComputerTechnology').click(function (e) {
                 debugger;
                 e.preventDefault();
-                // document.getElementById("startMathematics").disabled = false
-                document.getElementById("computer-technology-card").style.display = "none"
-                saveComputerTechnologyAnswers()
+                submitComputerTechnology()
             })
 
 
+            function submitGeneralKnowledge() {
+                document.getElementById("startMathematicsButton").disabled = false
+                document.getElementById("general-knowledge-card").style.display = "none"
+                saveGeneralKnowledgeAnswers();
+            }
+
+            function submitMathematics() {
+                document.getElementById("startComputerTechnologyButton").disabled = false
+                document.getElementById("mathematics-card").style.display = "none"
+                saveMathematicsAnswers()
+            }
+
+            function submitComputerTechnology() {
+                document.getElementById("computer-technology-card").style.display = "none"
+                saveComputerTechnologyAnswers()
+            }
             function getGeneralKnowledgeQuestions() {
                 let subject = "General Knowledge";
                 $.ajax({
@@ -898,7 +969,7 @@
                         success: function (response) {
                             debugger
                             console.log(response)
-                            if(response === "pass")
+                            if (response === "pass")
                                 alert("You Passed. Please check result details");
                             else
                                 alert("You Failed. Please check result details");
@@ -943,6 +1014,7 @@
                                 document.getElementById("general-knowledge-card").style.display = "block"
                                 document.getElementById("startGeneralKnowledgeButton").style.display = "none";
                                 getGeneralKnowledgeQuestions();
+                                timer();
                             }
                         }
                         else {
