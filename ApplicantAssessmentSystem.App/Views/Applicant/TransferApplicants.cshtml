@@ -11,24 +11,42 @@
     <thead>
         <tr>
             <th>
-              Applicant Id
+                Applicant Id
             </th>
             <th>
-               Applicant Name
+                Applicant Name
+            </th>
+            <th>
+                Applicant Total Score
+            </th>
+            <th>
+                Total Obtainable 
+            </th>
+            <th>
+                Percentage
             </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicantId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicantFullName)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicantId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicantFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicantTotalScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalObtainable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Percentage)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

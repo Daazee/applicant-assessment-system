@@ -12,5 +12,11 @@ namespace ApplicantAssessmentSystem.App.Models.ViewModels
         public int ApplicantId { get; set; }
 
         public string ApplicantFullName { get; set; }
+
+        public decimal ApplicantTotalScore { get; set; }
+
+        public decimal TotalObtainable { get; set; }
+
+        public decimal Percentage { get; set; }
     }
 }

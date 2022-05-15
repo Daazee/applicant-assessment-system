@@ -174,6 +174,10 @@ namespace ApplicantAssessmentSystem.App.Controllers
                 transferredApplicantViewModel.ApplicantId = transfer.ApplicantId;
                 var applicant = await _applicantRepository.GetItem(transfer.ApplicantId);
                 transferredApplicantViewModel.ApplicantFullName = $"{applicant.FirstName} {applicant.LastName}";
+                transferredApplicantViewModel.ApplicantTotalScore = transfer.ApplicantTotalScore;
+                transferredApplicantViewModel.TotalObtainable = transfer.TotalObtainable;
+                transferredApplicantViewModel.Percentage = transfer.Percentage;
+
                 transferredApplicantsViewModel.Add(transferredApplicantViewModel);
             }
             //var transferredApplicantsViewModel = _mapper.Map<List<Transfer>, List<TransferViewModel>>(transferredApplicants.ToList());

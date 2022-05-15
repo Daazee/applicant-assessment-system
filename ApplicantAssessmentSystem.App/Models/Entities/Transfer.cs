@@ -10,5 +10,12 @@ namespace ApplicantAssessmentSystem.App.Models.Entities
         public int TransferId { get; set; }
 
         public int ApplicantId { get; set; }
+
+        public decimal ApplicantTotalScore { get; set; }
+
+        public decimal TotalObtainable { get; set; }
+
+        public decimal Percentage { get; set; }
+
     }
 }

@@ -81,8 +81,8 @@ namespace ApplicantAssessmentSystem.App.ApiController
                     if (summaryScore.Count() > 0)
                     {
 
-                        double totalApplicantScore = 0;
-                        double totalObatinableScore = 0;
+                        decimal totalApplicantScore = 0;
+                        decimal totalObatinableScore = 0;
 
 
                         foreach (var summary in summaryScore)
@@ -92,12 +92,16 @@ namespace ApplicantAssessmentSystem.App.ApiController
                         }
 
                         //calculate percentage
-                        double applicantScorePercentage = totalApplicantScore / totalObatinableScore * 100;
+                        decimal applicantScorePercentage = totalApplicantScore / totalObatinableScore * 100;
 
-                        if (applicantScorePercentage > 50.0)
+                        if (applicantScorePercentage > 50.0m)
                         {
                             Transfer transfer = new Transfer();
                             transfer.ApplicantId = answerDetailsViewModels.First().ApplicantId;
+                            transfer.ApplicantTotalScore = totalApplicantScore;
+                            transfer.TotalObtainable = totalObatinableScore;
+                            transfer.Percentage = applicantScorePercentage;
+
                             await _transferRepository.AddItem(transfer);
                             return Ok("pass");
                         }
