@@ -167,7 +167,16 @@ namespace ApplicantAssessmentSystem.App.Controllers
         public async Task<ActionResult> TransferApplicants()
         {
             var transferredApplicants = await _transferRepository.GetItems();
-            var transferredApplicantsViewModel = _mapper.Map<List<Transfer>, List<TransferViewModel>>(transferredApplicants.ToList());
+            List<TransferViewModel> transferredApplicantsViewModel = new List<TransferViewModel>();
+            foreach (Transfer transfer in transferredApplicants)
+            {
+                TransferViewModel transferredApplicantViewModel = new TransferViewModel();
+                transferredApplicantViewModel.ApplicantId = transfer.ApplicantId;
+                var applicant = await _applicantRepository.GetItem(transfer.ApplicantId);
+                transferredApplicantViewModel.ApplicantFullName = $"{applicant.FirstName} {applicant.LastName}";
+                transferredApplicantsViewModel.Add(transferredApplicantViewModel);
+            }
+            //var transferredApplicantsViewModel = _mapper.Map<List<Transfer>, List<TransferViewModel>>(transferredApplicants.ToList());
             return View(transferredApplicantsViewModel);
         }
         // GET: ApplicantController/Edit/5
